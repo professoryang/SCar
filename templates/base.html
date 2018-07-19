@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+<div class="container">
+    <div id="nav">
+        <div class="MD-common-header-nav">
+            <a style='margin-right: 10px' href="//www.xin.com/beijing/" class="MD-common-header-active" rel="nofollow">首页</a>
+            <a style='margin-right: 10px' href="//www.xin.com/beijing/s/" class="" rel="nofollow" title="购买二手车"
+               uxevent="/w_top/buycar">买车</a>
+            <a style="margin-right: 700px" href="//www.xin.com/sale/c2b_car/201/" class="" rel="nofollow" title="二手车出售"
+               uxevent="w_top/c2bsell">卖车</a>
+            <a style="margin-right: 10px" href="//www.xin.com/beijing/h/" class="" rel="nofollow" title="首付一半 分期付款"
+               uxevent="w_top/halfprice">分期购</a>
+            <a style="margin-right: 10px" abevent=" home/newcar" class="MD-common-header-newcar"
+               href="//www.yichenggou.com/beijing/" title="购买新车"
+               target="_blank">新车<i class="MD-common-header-h-yc"></i></a>
+            <a style="margin-right: 10px" href="//www.xin.com/activity/201/" class="" rel="nofollow" title="知心推荐 问题答疑"
+               uxevent="/w_top/question">宝典</a>
+            <a style="margin-right: 10px" href="//www.xin.com/service/201/" class="" rel="nofollow" title="优信二手车服务保障"
+               uxevent="w_top/service">服务保障</a>
+            <a style="margin-right: 10px" href="//www.xin.com/app/" rel="nofollow" title="优信二手车手机APP"
+               uxevent="/w_top/dl_app">APP下载</a>
+        </div>
+    </div>
+    <div>
+         <ul class="nav navbar-nav navbar-right">
+              {% if request.session.is_login %}
+                  <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="/car/logout/">登出</a></li>
+              {% else %}
+                  <li><a style="font: 20px Arial Black" href="/car/login/">登录</a></li>
+                  <li><a style="font:  20px Arial Black" href="/car/registe/">注册</a></li>
+              {% endif %}
+          </ul>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <hr>
+    <div style="text-align: center" id="footer">
+        <h5>版权所有@亮亮二手车管理系统</h5>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+</div>
+</body>
+</html>
