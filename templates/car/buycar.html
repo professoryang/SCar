@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load staticfiles %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/buycar.css' %}">{% endblock %}
+    <div>
+        <section style="margin-top: 50px;" class="head">
+            <ul style="list-style: none" class="ajx">
+                <li class="mou" style="width: 100px">热门</li>
+                {% for letter in letters %}
+                    <li class="mou">{{ letter }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="detial">
+            <ul>
+                {% for brand in brands %}
+                    <li>{{ brand.name }}</li>
+                {% endfor %}
+
+            </ul>
+        </section>
+    </div>
+    <script>
+        $('.ajx').on('mouseover', '.mou', function () {
+            debugger;
+            $.ajax({
+                type: "get",
+                url: '/car/buycarone/',
+                data: {'lett': $(this).text()},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    var _arr = [];
+                    for (var i = 0; i < data.length; i++) {
+                        _arr.push('<li id="' + data[i].id + '">' + data[i].name + '</li>')
+                    }
+                    $(".detial ul").html("").html(_arr.join(""));
+
+
+                },
+                error: function () {
+                    alert("fuck!")
+                }
+
+            })
+        })
+    </script>
+{% endblock %}

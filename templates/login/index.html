@@ -1,9 +1,52 @@
 {% extends 'base.html' %}
 {% block title %}主页{% endblock %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">{% endblock %}
 {% block content %}
-    {% if request.session.is_login %}
-    <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
-    {% else %}
-    <h1>你尚未登录，只能访问公开内容！</h1>
-    {% endif %}
+    <div class="index">
+        <section class="headbg">
+            <div class="bj">
+                <input style="width: 600px ; margin: 100px 0 0 50px"><a type="button">搜索爱车</a>
+                <img style="margin-top: 2px ;width: 100% " src="{% static 'ups/user/images/163771796226198632.png' %}">
+            </div>
+        </section>
+        <section class="price">
+            <div class="bj">
+                <ul class="col-xs-6">
+                    {% for brand in brands %}
+                        <a href="https://www.xin.com/xian"><img src="{{ brand.url }}">
+                            {{ brand.name }}</a>
+                    {% endfor %}
+                </ul>
+                <ul class="col-xs-6">
+                    {% for outer in outers %}
+                        <a href="https://www.xin.com/xian/sn_l6/"><img src="{{ outer.name }}">{{ outer.kind }}</a>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </div>
+
 {% endblock %}
+
+
+
+
+
+{##}
+{#{% block content %}#}
+{#    {% if request.session.is_login %}#}
+{#    <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>#}
+{#    {% else %}#}
+{#    <h1>你尚未登录，只能访问公开内容！</h1>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+
+
+# j解决高并发，抢购，celery+redis

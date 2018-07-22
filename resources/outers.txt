@@ -1,0 +1,6 @@
+http://s6.xinstatic.com/xinwap/images/common/c-2.png,SUV
+http://s6.xinstatic.com/xinwap/images/common/c-4.png,面包
+http://s6.xinstatic.com/xinwap/images/common/c-5.png,跑车
+http://s6.xinstatic.com/xinwap/images/common/c-3.png,MPV
+http://s6.xinstatic.com/xinwap/images/common/c-7.png,皮卡
+http://s6.xinstatic.com/xinwap/images/common/c-8.png,商务

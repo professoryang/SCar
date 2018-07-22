@@ -76,8 +76,8 @@ WSGI_APPLICATION = 'JieyePro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jieyecar',
-        'HOST': '192.168.61.131',
+        'NAME': 'secondcar',
+        'HOST': '192.168.61.132',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
@@ -126,3 +126,47 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/ups')
 MEDIA_URL = '/static/ups/'
+
+# ---------------------配置日志------------------------
+
+LOGGING = {
+    'version': 1.0,
+    'disable_existing_loggers': True,
+    #  日志格式器
+    'formatters': {
+        'info': {
+            'format': '[%(asctime)s:%(funcName)s-%(lineno)s]>%(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        }
+    },
+    #  日志过滤器
+
+    # 'filters': {},
+    #  日志处理器 ，格式器
+
+    'handlers': {
+
+        'console': {
+            'level': 'INFO',
+            'formatter': 'info',
+            'class': 'logging.StreamHandler',
+        },
+        'logFile': {
+            'level': 'INFO',
+            'formatter': 'info',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'a.log',
+            'encoding': 'utf-8'
+        }
+    },
+    #  日志对象：需要处理器handler
+
+    'loggers': {
+        'mdjango': {
+            'handlers': ['console', 'logFile'],
+            'level': 'INFO',
+            'propagate': False
+        }
+    }
+}
+# ---------------endlogger -------

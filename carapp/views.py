@@ -1,10 +1,18 @@
+import hashlib
+import json
+import logging
+
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from carapp import forms
-from carapp.models import UserProfile
+from carapp.models import *
 
 
 def index(request):
-    return render(request, 'login/index.html')
+    brands = Brand.objects.all().values()
+    outers = Outer.objects.all().values()
+    return render(request, 'login/index.html',
+                  {"brands": brands, "outers": outers})
 
 
 def registe(request, models=None):
@@ -23,18 +31,18 @@ def registe(request, models=None):
                 message = "两次输入的密码不同"
                 return render(request, 'login/registe.html', locals())
             else:
-                same_name_user = UserProfile.objects.filter(name=name)
+                same_name_user = User.objects.filter(name=name)
                 if same_name_user:
                     message = "用户已经存在，请重新选择"
                     return render(request, 'login/registe.html', locals())
-                same_email_user = UserProfile.objects.filter(email=email)
+                same_email_user = User.objects.filter(email=email)
                 if same_email_user:  # 邮箱地址唯一
                     message = '该邮箱地址已被注册，请使用别的邮箱！'
                     return render(request, 'login/registe.html', locals())
 
-            user1 = UserProfile()
+            user1 = User()
             user1.name = name
-            user1.passwd = passwd
+            user1.passwd = protect(passwd)
             user1.passwd2 = passwd2
             user1.email = email
             user1.phone = phone
@@ -57,8 +65,8 @@ def login(request):
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             try:
-                user = UserProfile.objects.get(name=username)
-                if user.passwd == password:
+                user = User.objects.get(name=username)
+                if user.passwd == protect(password):
                     # add session key: is_login, user_id, user_name
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
@@ -74,8 +82,10 @@ def login(request):
     return render(request, 'login/login.html', locals())
 
 
-def yzm(request):
-    return None
+def protect(obj):
+    m = hashlib.md5()
+    m.update(str(obj).encode())
+    return m.hexdigest()
 
 
 def logout(request):
@@ -87,3 +97,22 @@ def logout(request):
     # del request.session['user_id']
     # del request.session['user_name']
     return redirect('/car/index/')
+
+
+def buycar(request):
+    # 打印日志
+    logging.getLogger('mdjango').warning('正在点击字母')
+    letters = Letter.objects.all().values()
+    t = []
+    for i in letters:
+        t.append(i['name'])
+    brands = Brand.objects.all().values()
+    return render(request, 'car/buycar.html', {'letters': t, 'brands': brands})
+
+
+def buycarone(request):
+    lett = request.GET.get('lett')
+    letters = Letter.objects.get(name=lett).pinpai_set.all().values()
+    print(type(letters))
+
+    return HttpResponse(json.dumps(list(letters)))

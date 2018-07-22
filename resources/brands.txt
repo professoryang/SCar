@@ -1,0 +1,12 @@
+http://s6.xinstatic.com/xin/images/brand-55/b_84.png,大众
+http://s6.xinstatic.com/xin/images/brand-55/b_62.png,奥迪
+http://s6.xinstatic.com/xin/images/brand-55/b_59.png,本田
+http://s6.xinstatic.com/xin/images/brand-55/b_38.png,宝马
+http://s6.xinstatic.com/xin/images/brand-55/b_47.png,奔驰
+http://s6.xinstatic.com/xin/images/brand-55/b_89.png,丰田
+http://s6.xinstatic.com/xin/images/brand-55/b_98.png,福特
+http://s6.xinstatic.com/xin/images/brand-55/b_55.png,现代
+http://s6.xinstatic.com/xin/images/brand-55/b_129.png,起亚
+http://s6.xinstatic.com/xin/images/brand-55/b_73.png,雪佛兰
+http://s6.xinstatic.com/xin/images/brand-55/b_34.png,别克
+http://s6.xinstatic.com/xin/images/brand-55/b_235.png,哈弗

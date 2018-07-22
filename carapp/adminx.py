@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 import xadmin as admin
-from carapp.models import UserProfile
+from carapp.models import *
 from xadmin import views
 
 
@@ -19,15 +19,15 @@ class GlobalSettings:
     site_footer = '二手车管理项目'
     menu_style = 'accordion'  # 菜单折叠
     # 搜索模型
-    global_search_models = [UserProfile]
+    global_search_models = [User]
 
     # 模型的图标(参考bootstrap图标插件)
     global_models_icon = {
-        UserProfile: "glyphicon glyphicon-user",
+        User: "glyphicon glyphicon-user",
     }  # 设置models的全局图标
 
 
-class UserProfileAdmin:
+class UserAdmin:
     # 后台列表显示列
     list_display = ['name', 'phone', 'email']
     # 后台列表查询条件
@@ -37,4 +37,4 @@ class UserProfileAdmin:
 admin.site.register(views.CommAdminView, GlobalSettings)
 admin.site.register(views.BaseAdminView, BaseSetting)
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(User, UserAdmin)

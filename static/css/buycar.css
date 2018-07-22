@@ -1,0 +1,18 @@
+.mou {
+    float: left;
+    width: 20px;
+}
+
+.head {
+    overflow: hidden;
+}
+
+.detial {
+    overflow: hidden;
+}
+
+.detial li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+}
